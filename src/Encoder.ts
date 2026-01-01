@@ -274,7 +274,11 @@ export class Encoder<ContextType = undefined> {
         }
       }
     } else {
-      this.encodeNumberAsFloat(object);
+      if (!Number.isInteger(object)) {
+        this.encodeNumberAsFloat(object);
+        return;
+      }
+      this.encodeBigInt64(BigInt(object));
     }
   }
 
